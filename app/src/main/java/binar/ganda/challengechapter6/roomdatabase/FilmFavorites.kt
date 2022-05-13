@@ -10,7 +10,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity
 data class FilmFavorites(
-    @PrimaryKey(autoGenerate = true) val id :Int?,
+    @PrimaryKey() val id :Int?,
     val date: String,
     val description: String,
     val director: String,

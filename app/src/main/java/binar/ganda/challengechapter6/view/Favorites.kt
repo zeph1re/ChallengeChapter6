@@ -16,33 +16,27 @@ import kotlinx.coroutines.launch
 
 class Favorites : AppCompatActivity() {
 
-    lateinit var filmFavAdapter : FilmFavoritesAdapter
-
     private var filmFavDB : FilmFavoritesDatabase? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorites)
-        getDataFavFilm()
+
         filmFavDB = FilmFavoritesDatabase.getInstance(this)
 
+        getDataFavFilm()
     }
 
     fun getDataFavFilm() {
         rv_favorites_film.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
 
         GlobalScope.launch {
             val listFavFilm = filmFavDB?.filmFavDao()?.getAllFilmFavorites()
             runOnUiThread{
                 listFavFilm.let {
                     //set adapter
-                    rv_favorites_film.adapter = FilmFavoritesAdapter(){
-                        val clickedFilm = bundleOf("DATA_FILM" to it)
-                        val pindah = Intent(this@Favorites, Detail::class.java)
-                        pindah.putExtras(clickedFilm)
-                        startActivity(pindah)
-                    }
+                    rv_favorites_film.adapter = FilmFavoritesAdapter()
+
 
                 }
             }

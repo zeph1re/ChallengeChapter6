@@ -9,7 +9,7 @@ import binar.ganda.challengechapter6.model.ResponseDataFilmItem
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_list.view.*
 
-class FilmFavoritesAdapter(private val onClick: (ResponseDataFilmItem) -> Unit): RecyclerView.Adapter<FilmFavoritesAdapter.ViewHolder>() {
+class FilmFavoritesAdapter(): RecyclerView.Adapter<FilmFavoritesAdapter.ViewHolder>() {
 
 
     private var listFilmFavorites : List<ResponseDataFilmItem>? = null
@@ -34,9 +34,9 @@ class FilmFavoritesAdapter(private val onClick: (ResponseDataFilmItem) -> Unit):
 
         Glide.with(holder.itemView.context).load(listFilmFavorites!![position].image).into(holder.itemView.image_film)
 
-        holder.itemView.cardFilm.setOnClickListener {
-            onClick(listFilmFavorites!![position])
-        }
+//        holder.itemView.cardFilm.setOnClickListener {
+//            onClick(listFilmFavorites!![position])
+//        }
 
     }
 

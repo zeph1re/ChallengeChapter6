@@ -17,7 +17,7 @@ abstract class FilmFavoritesDatabase : RoomDatabase() {
             if (INSTANCE == null) {
                 synchronized(FilmFavoritesDatabase::class){
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
-                        FilmFavoritesDatabase::class.java,"FilmFavorites.db").allowMainThreadQueries().build()
+                        FilmFavoritesDatabase::class.java,"FilmFavorites.db").allowMainThreadQueries().fallbackToDestructiveMigration().build()
                 }
             }
             return INSTANCE
