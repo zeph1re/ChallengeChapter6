@@ -1,3 +1,5 @@
+@file:Suppress("DeferredResultUnused")
+
 package binar.ganda.challengechapter6.view.adapter
 
 import android.app.AlertDialog
@@ -12,7 +14,6 @@ import binar.ganda.challengechapter6.R
 import binar.ganda.challengechapter6.roomdatabase.FilmFavorites
 import binar.ganda.challengechapter6.roomdatabase.FilmFavoritesDatabase
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_detail.view.*
 import kotlinx.android.synthetic.main.favorites_item_list.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async

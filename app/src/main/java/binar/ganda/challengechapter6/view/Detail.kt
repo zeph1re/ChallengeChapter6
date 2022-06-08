@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
 import binar.ganda.challengechapter6.R
 import binar.ganda.challengechapter6.model.ResponseDataFilmItem
 import binar.ganda.challengechapter6.roomdatabase.FilmFavorites
