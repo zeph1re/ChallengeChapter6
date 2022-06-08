@@ -1,25 +1,28 @@
 package binar.ganda.challengechapter6.manager
 
 import android.content.Context
-import androidx.datastore.DataStore
+import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.*
-import com.google.gson.annotations.SerializedName
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class UserManager(context : Context) {
-    private val dataStore : DataStore<Preferences> = context.createDataStore(name = "USER_PREF")
+
+private val Context.dataStore : DataStore<Preferences> by preferencesDataStore(name = "USER_PREF")
+
+class UserManager(private val context : Context) {
 
     companion object {
-
-        val ADDRESS = preferencesKey<String>("USER_ADDRESS")
-        val COMPLETENAME = preferencesKey<String>("USER_COMPLETE_NAME")
-        val CREATEAT = preferencesKey<String>("USER_CREATEAT")
-        val DATEOFBIRTH = preferencesKey<String>("USER_DATEOFBIRTH")
-        val EMAIL = preferencesKey<String>("USER_EMAIL")
-        val ID = preferencesKey<String>("USER_ID")
-        val PASSWORD = preferencesKey<String>("USER_PASSWORD")
-        val USERNAME = preferencesKey<String>("USER_USERNAME")
+        val ADDRESS = stringPreferencesKey("USER_ADDRESS")
+        val COMPLETENAME =  stringPreferencesKey("USER_COMPLETE_NAME")
+        val CREATEAT =  stringPreferencesKey("USER_CREATEAT")
+        val DATEOFBIRTH =  stringPreferencesKey("USER_DATEOFBIRTH")
+        val EMAIL =  stringPreferencesKey("USER_EMAIL")
+        val ID =  stringPreferencesKey("USER_ID")
+        val PASSWORD =  stringPreferencesKey("USER_PASSWORD")
+        val USERNAME = stringPreferencesKey("USER_USERNAME")
     }
 
     suspend fun saveData(
@@ -32,7 +35,7 @@ class UserManager(context : Context) {
         password : String,
         username : String
     ){
-        dataStore.edit {
+        context.dataStore.edit {
             it[ADDRESS] = address
             it[COMPLETENAME] = completeName
             it[CREATEAT] = createAt
@@ -45,38 +48,20 @@ class UserManager(context : Context) {
     }
 
 
-
-    val userAddress : Flow<String> = dataStore.data.map {
-        it[ADDRESS] ?: ""
-    }
-    val userCompleteName : Flow<String> = dataStore.data.map {
-        it[COMPLETENAME] ?: ""
-    }
-    val userCreateAt : Flow<String> = dataStore.data.map {
-        it[CREATEAT] ?: ""
-    }
-    val userDateOfBirth : Flow<String> = dataStore.data.map {
-        it[COMPLETENAME] ?: ""
-    }
-
-    val userEmail : Flow<String> = dataStore.data.map {
+    val userEmail : Flow<String> = context.dataStore.data.map {
         it[EMAIL] ?: ""
     }
 
-    val userID : Flow<String> = dataStore.data.map {
-        it[ID] ?: ""
-    }
-
-    val userPassword : Flow<String> = dataStore.data.map {
+    val userPassword : Flow<String> = context.dataStore.data.map {
         it[PASSWORD] ?: ""
     }
 
-    val userUsername : Flow<String> = dataStore.data.map {
+    val userUsername : Flow<String> = context.dataStore.data.map {
         it[USERNAME] ?: ""
     }
 
     suspend fun clearData() {
-        dataStore.edit {
+        context.dataStore.edit {
             it.clear()
         }
     }

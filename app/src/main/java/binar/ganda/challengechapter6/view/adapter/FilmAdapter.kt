@@ -1,24 +1,13 @@
 package binar.ganda.challengechapter6.view.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import binar.ganda.challengechapter6.R
 import binar.ganda.challengechapter6.model.ResponseDataFilmItem
-import binar.ganda.challengechapter6.roomdatabase.FilmFavorites
-import binar.ganda.challengechapter6.roomdatabase.FilmFavoritesDatabase
-import binar.ganda.challengechapter6.view.Detail
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_list.*
 import kotlinx.android.synthetic.main.item_list.view.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-
 
 
 class FilmAdapter(private val onClick: (ResponseDataFilmItem) -> Unit) : RecyclerView.Adapter<FilmAdapter.ViewHolder>() {

@@ -9,13 +9,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FilmViewModel : ViewModel() {
-    lateinit var liveDataFilm : MutableLiveData<List<ResponseDataFilmItem>>
+    var liveDataFilm : MutableLiveData<List<ResponseDataFilmItem>?> = MutableLiveData()
 
-    init {
-        liveDataFilm = MutableLiveData()
-    }
-
-    fun getLivedataFilm() : MutableLiveData<List<ResponseDataFilmItem>> {
+    fun getLivedataFilm() : MutableLiveData<List<ResponseDataFilmItem>?> {
         return liveDataFilm
     }
 

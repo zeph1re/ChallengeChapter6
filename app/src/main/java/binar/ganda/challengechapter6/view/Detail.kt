@@ -1,10 +1,12 @@
+@file:Suppress("DeferredResultUnused")
+
 package binar.ganda.challengechapter6.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
 import binar.ganda.challengechapter6.R
 import binar.ganda.challengechapter6.model.ResponseDataFilmItem
 import binar.ganda.challengechapter6.roomdatabase.FilmFavorites
@@ -16,13 +18,12 @@ import kotlinx.coroutines.async
 
 class Detail : AppCompatActivity() {
 
-    private var filmFavDB : FilmFavoritesDatabase? = null
-
-
+    private var filmFavDB: FilmFavoritesDatabase? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        filmFavDB = FilmFavoritesDatabase.getInstance(this.applicationContext)
 
         getAllDetail()
         addFilmToFavorites()
@@ -59,20 +60,21 @@ class Detail : AppCompatActivity() {
             val sinopsis = details?.description.toString()
             val id = details?.id
             GlobalScope.async {
-                val favFilm = FilmFavorites( id!!.toInt(), releaseDate, sinopsis, sutradara, image, judul)
+                val favFilm =
+                    FilmFavorites(id!!.toInt(), releaseDate, sinopsis, sutradara, image, judul)
                 val result = filmFavDB?.filmFavDao()?.insertFilmFavorites(favFilm)
-                            runOnUiThread {
-                                if (result != 0.toLong()) {
-                                    Toast.makeText(this@Detail, "Item added to Favorites", Toast.LENGTH_LONG)
-                                        .show()
-                                } else {
-                                    Toast.makeText(this@Detail, "Gagal", Toast.LENGTH_LONG).show()
-                                }
-                                Log.d("tes2", result.toString())
-                                Log.d("tes3", judul)
+                runOnUiThread {
+                    if (result != 0.toLong() || result != null) {
+                        Toast.makeText(this@Detail, "Item added to Favorites", Toast.LENGTH_LONG)
+                            .show()
+                    } else {
+                        Toast.makeText(this@Detail, "Gagal", Toast.LENGTH_LONG).show()
+                    }
+                    Log.d("tes2", result.toString())
+                    Log.d("tes3", judul)
 
-                            }
                 }
+            }
 
 
         }

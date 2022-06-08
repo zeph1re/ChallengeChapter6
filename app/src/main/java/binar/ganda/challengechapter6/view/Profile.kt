@@ -2,15 +2,14 @@ package binar.ganda.challengechapter6.view
 
 import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import binar.ganda.challengechapter6.manager.UserManager
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import binar.ganda.challengechapter6.R
+import binar.ganda.challengechapter6.manager.UserManager
 import binar.ganda.challengechapter6.model.DefaultResponse
 import binar.ganda.challengechapter6.model.ResponseDataUserItem
 import binar.ganda.challengechapter6.network.UserRetrofit
@@ -23,12 +22,12 @@ import retrofit2.Response
 
 class Profile : AppCompatActivity() {
 
-    lateinit var userManager : UserManager
-    lateinit var viewModelUser : UserViewModel
-    lateinit var listUser: List<ResponseDataUserItem>
-    lateinit var idLogin : String
-    lateinit var emailLogin : String
-    lateinit var passwordLogin : String
+    private lateinit var userManager : UserManager
+    private lateinit var viewModelUser : UserViewModel
+    private lateinit var listUser: List<ResponseDataUserItem>
+    private lateinit var idLogin : String
+    private lateinit var emailLogin : String
+    private lateinit var passwordLogin : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +41,7 @@ class Profile : AppCompatActivity() {
             val tanggalLahirNew = edit_tanggal_lahir.text.toString()
             val alamatNew = edit_alamat.text.toString()
             val id = idLogin
-            updateUserData(id!!, usernameNew, namaLengkapNew, tanggalLahirNew, alamatNew)
+            updateUserData(id, usernameNew, namaLengkapNew, tanggalLahirNew, alamatNew)
         }
 
 
@@ -104,9 +103,9 @@ class Profile : AppCompatActivity() {
                 passwordLogin = it.toString()
             }
 
-            viewModelUser = ViewModelProvider(this).get(UserViewModel::class.java)
+            viewModelUser = ViewModelProvider(this)[UserViewModel::class.java]
 
-            viewModelUser.getLivedataUser().observe(this, Observer {
+            viewModelUser.getLivedataUser().observe(this) {
                 listUser = it
                 for (i in listUser.indices)
                     if (passwordLogin == listUser[i].password && emailLogin == listUser[i].email) {
@@ -122,16 +121,12 @@ class Profile : AppCompatActivity() {
                         edit_alamat.setText(alamat)
                     }
 
-                    })
-                viewModelUser.callApiUser()
+            }
+        viewModelUser.callApiUser()
             }
 
-    private fun updateuser() {
 
-    }
-
-
-    }
+}
 
 
 

@@ -1,7 +1,6 @@
 package binar.ganda.challengechapter6.network
 
 import binar.ganda.challengechapter6.model.DefaultResponse
-import binar.ganda.challengechapter6.model.LoginResponse
 import binar.ganda.challengechapter6.model.ResponseDataUserItem
 import retrofit2.Call
 import retrofit2.http.Field
@@ -10,13 +9,6 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface UserService {
-
-    @POST("login.php")
-    @FormUrlEncoded
-    fun loginUser(
-        @Field("email") email: String,
-        @Field("password") password : String
-    ) : Call<LoginResponse>
 
     @POST("register.php")
     @FormUrlEncoded

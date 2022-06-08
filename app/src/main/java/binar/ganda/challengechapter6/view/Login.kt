@@ -2,13 +2,12 @@ package binar.ganda.challengechapter6.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import binar.ganda.challengechapter6.manager.UserManager
 import binar.ganda.challengechapter6.R
+import binar.ganda.challengechapter6.manager.UserManager
 import binar.ganda.challengechapter6.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.GlobalScope
@@ -18,7 +17,7 @@ import kotlinx.coroutines.launch
 class Login : AppCompatActivity() {
 
     private lateinit var viewModel: UserViewModel
-    lateinit var userManager: UserManager
+    private lateinit var userManager: UserManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +48,9 @@ class Login : AppCompatActivity() {
     private fun getUserUseViewModel() {
 
         if (input_email.text.isNotEmpty() && input_password.text.isNotEmpty()){
-            viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+            viewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
-            viewModel.getLivedataUser().observe(this, Observer {
+            viewModel.getLivedataUser().observe(this) {
                 for (i in it.indices) {
                     val emailInput = input_email.text.toString()
                     val passwordInput = input_password.text.toString()
@@ -73,7 +72,7 @@ class Login : AppCompatActivity() {
                         }
                     }
                 }
-            })
+            }
             viewModel.callApiUser()
         } else {
             Toast.makeText(this,"Email dan Password harus di isi", Toast.LENGTH_LONG).show()

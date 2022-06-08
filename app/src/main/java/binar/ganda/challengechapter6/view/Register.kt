@@ -1,10 +1,9 @@
 package binar.ganda.challengechapter6.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import binar.ganda.challengechapter6.R
 import binar.ganda.challengechapter6.model.DefaultResponse
@@ -53,11 +52,11 @@ class Register : AppCompatActivity() {
         val password = input_password.text.toString()
         val email = input_email.text.toString()
 
-        viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        viewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
-        viewModel.getLivedataUser().observe(this, Observer {
-            postDataUser(email,username,password)
-        })
+        viewModel.getLivedataUser().observe(this) {
+            postDataUser(email, username, password)
+        }
 
         viewModel.callApiUser()
     }

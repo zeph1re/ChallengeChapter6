@@ -10,9 +10,9 @@ import binar.ganda.challengechapter6.manager.UserManager
 
 class SplashScreen : AppCompatActivity() {
 
-    lateinit var userManager: UserManager
-    lateinit var emailLogin : String
-    lateinit var passwordLogin :String
+    private lateinit var userManager: UserManager
+    private lateinit var emailLogin : String
+    private lateinit var passwordLogin :String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class SplashScreen : AppCompatActivity() {
             passwordLogin = it.toString()
         }
 
-        Handler().postDelayed(Runnable {
+        Handler().postDelayed({
             if (emailLogin.isNotEmpty() && passwordLogin.isNotEmpty()){
                 startActivity(Intent(this@SplashScreen, Home::class.java))
             } else {

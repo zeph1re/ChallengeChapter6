@@ -23,9 +23,6 @@ abstract class FilmFavoritesDatabase : RoomDatabase() {
             return INSTANCE
         }
 
-        fun destroyInstance() {
-            INSTANCE = null
-        }
     }
 
 

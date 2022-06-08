@@ -18,7 +18,8 @@
             android:layout_height="100dp"
             android:id="@+id/image_film"
             android:src="@drawable/ic_launcher_background"
-            android:layout_marginEnd="20dp"/>
+            android:layout_marginEnd="20dp"
+            android:contentDescription="TODO" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,11 +51,11 @@
             android:layout_below="@id/tv_tanggal_rilis"/>
 
         <CheckBox
+            android:id="@+id/favorites_check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/favorites_btn"
-            android:layout_alignParentRight="true"
             android:layout_below="@id/tv_sutradara"
+            android:layout_alignParentRight="true"
             android:button="@drawable/selector_favorites_item" />
 
 
